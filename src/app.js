@@ -6,6 +6,8 @@ const compression = require('compression')
 const helmet = require('helmet')
 const cors = require('cors')
 
+const api = require('./routes/api')
+
 const app = express()
 app.set('port', process.env.PORT || 5000)
 
@@ -13,6 +15,8 @@ app.use(compression())
 app.use(helmet())
 app.use(cors())
 app.use(express.json())
+
+app.use('/api', api)
 
 app.use('*', async (req, res, next) => {
 	res.status(404)
